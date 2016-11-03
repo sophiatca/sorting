@@ -17,24 +17,30 @@ describe('Split Array function', function() {
 
 describe('Merge ', function(){
 
+   var compare = function(a, b) {
+    if (a < b) return -1;
+    if (a > b) return  1;
+    return 0;
+  };
+
   it('handles two empty arrays', function(){
-    expect( merge([],[]) ).toEqual([]);
+    expect( merge([],[],compare) ).toEqual([]);
   });
 
   it('handles a single element array and an empty array', function(){
-    expect( merge([1],[]) ).toEqual( [1] );
+    expect( merge([1],[], compare) ).toEqual( [1] );
   });
 
   it('handles two arrays with one element each', function(){
-    expect( merge([2],[1]) ).toEqual( [1,2] );
+    expect( merge([2],[1], compare) ).toEqual( [1,2] );
   });
 
    it('handles two sorted arrays with multiple element (interleave)', function(){
-    expect( merge([1,3,5,7],[2,4,6,8]) ).toEqual( [1,2,3,4,5,6,7,8] );
+    expect( merge([1,3,5,7],[2,4,6,8], compare) ).toEqual( [1,2,3,4,5,6,7,8] );
   });
 
     it('handles two sorted arrays with multiple elements (not only interleave)', function(){
-    expect( merge([2,3,5,7],[1,9,10,11]) ).toEqual( [1,2,3,5,7,9,10,11] );
+    expect( merge([2,3,5,7],[1,9,10,11], compare) ).toEqual( [1,2,3,5,7,9,10,11] );
   });
 });
 

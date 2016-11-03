@@ -6,11 +6,11 @@ function split(wholeArray){
   return [firstHalf,secondHalf];
 }
 
-function merge (arr1, arr2){
+function merge (arr1, arr2,func){
   let result = [];
 
   while (arr1.length > 0 && arr2.length > 0) {
-    if (arr1[0] < arr2[0]) {
+    if (func(arr1[0], arr2[0]) ===-1) {
       result.push(arr1.shift());
     }
     else {
@@ -28,11 +28,19 @@ function merge (arr1, arr2){
 // }
 
 
-function mergeSort(arr) {
+function mergeSort(arr, func) {
+
+   func = func || function(a, b) {
+    if (a < b) return -1;
+    if (a > b) return  1;
+    return 0;
+  }
+
+
   if (arr.length < 2) {
     return arr;
   }
   var newArr = split(arr);
-  return merge(mergeSort(newArr[0]), mergeSort(newArr[1]));
+  return merge(mergeSort(newArr[0], func), mergeSort(newArr[1], func),func);
 
 }
